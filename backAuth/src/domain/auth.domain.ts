@@ -2,7 +2,11 @@ import { User, UserInput } from '../models/user.type';
 import { hash, compare } from 'bcrypt';
 import { UserRepository, UserRepositoryInterface } from '../repository';
 import { AppError, HttpCode } from '../helpers';
-import { generateToken } from '../helpers/jwt/jwt.helpers';
+import {
+  generateToken,
+  verifyToken,
+  decodeToken,
+} from '../helpers/jwt/jwt.helpers';
 import { AuthDomainInterface } from './auth.domain.interface';
 
 /**
@@ -63,5 +67,48 @@ export class AuthDomain implements AuthDomainInterface {
       password: await hash(user.password, 10),
     };
     return await this.userRepository.createUser(userToCreate);
+  }
+
+  /**
+   * Gets the user
+   * @param {string} token - The token
+   * @returns {Promise<User>} The user
+   * @throws {AppError} If the token is invalid
+   */
+  async me(token: string): Promise<User> {
+    const decodedToken: any = decodeToken(token);
+    if (!decodedToken) {
+      throw new AppError({
+        message: 'Invalid token',
+        status: HttpCode.UNAUTHORIZED,
+      });
+    }
+    const user = await this.userRepository.findUserByEmail(decodedToken._id);
+    if (!user) {
+      throw new AppError({
+        message: 'User not found',
+        status: HttpCode.BAD_REQUEST,
+      });
+    }
+    return user;
+  }
+
+  /**
+   * Logs out a user
+   * @param {string} token - The token
+   * @returns {Promise<void>}
+   */
+  async logout(token: string): Promise<void> {
+    // Do something
+  }
+
+  /**
+   * Verifies a token
+   * @param {string} token - The token
+   * @returns {Promise<boolean>} True if the token is valid, false otherwise
+   */
+  async verifyToken(token: string): Promise<boolean> {
+    const verify = verifyToken(token);
+    return verify ? true : false;
   }
 }

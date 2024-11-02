@@ -18,4 +18,25 @@ export interface AuthDomainInterface {
    * @returns {Promise<User>} The registered user
    */
   register(user: UserInput): Promise<User>;
+
+  /**
+   * @method me - Gets the user
+   * @param {string} token - The token
+   * @returns {Promise<User>} The user
+   */
+  me(token: string): Promise<User>;
+
+  /**
+   * @method logout - Logs out a user
+   * @param {string} token - The token
+   * @returns {Promise<void>}
+   */
+  logout(token: string): Promise<void>;
+
+  /**
+   * @method verifyToken - Verifies a token
+   * @param {string} token - The token
+   * @returns {Promise<boolean>} True if the token is valid, false otherwise
+   */
+  verifyToken(token: string): Promise<boolean>;
 }
