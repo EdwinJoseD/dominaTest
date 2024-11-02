@@ -9,7 +9,11 @@
     "dev:proyecto1": "cd backAuth && npm run dev",
     "dev:proyecto2": "cd backTodo && npm run dev",
     "dev:proyecto3": "cd front && npm run dev",
-    "dev": "concurrently \"npm run dev:proyecto1\" \"npm run dev:proyecto2\" \"npm run dev:proyecto3\""
+    "dev": "concurrently \"npm run dev:proyecto1\" \"npm run dev:proyecto2\" \"npm run dev:proyecto3\"",
+    "test:proyecto1": "cd backAuth && npm test",
+    "test:proyecto2": "cd backTodo && npm test",
+    "test": "concurrently \"npm run test:proyecto1\" \"npm run test:proyecto2\""
+    
   },
   "devDependencies": {
     "concurrently": "^6.2.0" 
