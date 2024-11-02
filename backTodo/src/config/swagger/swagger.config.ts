@@ -2,10 +2,12 @@ import expressJSDocSwagger, { Options } from 'express-jsdoc-swagger';
 import { Application } from 'express';
 const { PREFIX } = process.env;
 
+import path from 'path';
+
 export const Swagger = async (app: Application) => {
   const options: Options = {
     info: {
-      title: 'API REST BACK AUTH',
+      title: 'API REST BACK TODO',
       version: '1.0.0',
       description: 'api rest for Domina',
     },
@@ -19,7 +21,7 @@ export const Swagger = async (app: Application) => {
     filesPattern: ['../../**/*.ts'],
     swaggerUIPath: PREFIX + '/api-docs',
     exposeSwaggerUI: true,
-    exposeApiDocs: true,
+    exposeApiDocs: false,
     apiDocsPath: PREFIX + '/v3/api-docs',
     notRequiredAsNullable: false,
   };

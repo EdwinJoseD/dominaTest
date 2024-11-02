@@ -7,6 +7,34 @@ import { verifytoken } from '../middleware/verifyToken.middleware';
 
 export const AuthController = Router();
 
+/**
+ * User input type
+ * @typedef {object} UserInputType
+ * @property {string} email.required - email
+ * @property {string} password.required - password
+ */
+/**
+ * Success Response
+ * @typedef {object} SuccessResponse
+ * @property {number} status.required - Status code
+ * @property {string} data.required - Task data
+ */
+/**
+ * Error Response
+ * @typedef {object} ErrorResponse
+ * @property {number} status.required - Status code
+ * @property {string} message.required - Error message
+ */
+/**
+ * POST /back-auth/api/auth/login
+ * @tags Auth
+ * @summary generate a token
+ * @description generate a token
+ * @param {UserInputType} request.body.required - user
+ * @return {SuccessResponse} 201 - Success response
+ * @return {ErrorResponse} 400 - Error de negocio
+ * @return {ServerError} 500 - Error de servidor
+ */
 AuthController.post(
   '/login',
   authValidator,
@@ -18,6 +46,28 @@ AuthController.post(
   }
 );
 
+/**
+ * Success Response
+ * @typedef {object} SuccessResponse
+ * @property {number} status.required - Status code
+ * @property {string} data.required - Task data
+ */
+/**
+ * Error Response
+ * @typedef {object} ErrorResponse
+ * @property {number} status.required - Status code
+ * @property {string} message.required - Error message
+ */
+/**
+ * POST /back-auth/api/auth/register
+ * @tags Auth
+ * @summary create a new user
+ * @description create a new user
+ * @param {UserInputType} request.body.required - email
+ * @return {SuccessResponse} 201 - Success response
+ * @return {ErrorResponse} 400 - Error de negocio
+ * @return {ServerError} 500 - Error de servidor
+ */
 AuthController.post(
   '/register',
   authValidator,
@@ -29,6 +79,28 @@ AuthController.post(
   }
 );
 
+/**
+ * Success Response
+ * @typedef {object} SuccessResponse
+ * @property {number} status.required - Status code
+ * @property {User} data.required - Task data
+ */
+/**
+ * Error Response
+ * @typedef {object} ErrorResponse
+ * @property {number} status.required - Status code
+ * @property {string} message.required - Error message
+ * */
+/**
+ * GET /back-auth/api/auth/me
+ * @tags Auth
+ * @summary get user data
+ * @description get user data
+ * @return {SuccessResponse} 200 - Success response
+ * @return {ErrorResponse} 400 - Error de negocio
+ * @return {ServerError} 500 - Error de servidor
+ * @security BearerAuth
+ */
 AuthController.get('/me', verifytoken, async (req: Request, res: Response) => {
   const { userToken } = req.body;
   const authDomain: AuthDomainInterface = new AuthDomain();
@@ -36,6 +108,28 @@ AuthController.get('/me', verifytoken, async (req: Request, res: Response) => {
   handleResponse(res, HttpCode.OK, user);
 });
 
+/**
+ * Success Response
+ * @typedef {object} SuccessResponse
+ * @property {number} status.required - Status code
+ * @property {boolean} data.required - Task data
+ */
+/**
+ * Error Response
+ * @typedef {object} ErrorResponse
+ * @property {number} status.required - Status code
+ * @property {string} message.required - Error message
+ * */
+/**
+ * GET /back-auth/api/auth/verify
+ * @tags Auth
+ * @summary verify token
+ * @description verify token
+ * @return {SuccessResponse} 200 - Success response
+ * @return {ErrorResponse} 400 - Error de negocio
+ * @return {ServerError} 500 - Error de servidor
+ * @security BearerAuth
+ */
 AuthController.get(
   '/verify',
   verifytoken,

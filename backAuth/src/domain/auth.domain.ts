@@ -83,7 +83,7 @@ export class AuthDomain implements AuthDomainInterface {
         status: HttpCode.UNAUTHORIZED,
       });
     }
-    const user = await this.userRepository.findUserByEmail(decodedToken._id);
+    const user = await this.userRepository.findUserByEmail(decodedToken.email);
     if (!user) {
       throw new AppError({
         message: 'User not found',

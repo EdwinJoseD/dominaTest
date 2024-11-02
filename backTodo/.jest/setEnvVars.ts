@@ -4,6 +4,6 @@ const variableTest = () => {
    */
   process.env.PORT = '3000';
   process.env.PREFIX = '/prefix';
-  process.env.JWT_SECRET = 'secretTest';
+  process.env.URI_AUTH = 'http://localhost:3000';
 };
 module.exports = variableTest;
