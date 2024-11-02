@@ -1,0 +1,21 @@
+{
+    "scripts": {
+    "install": "cd backAuth && npm install && cd ../backTodo && npm install && cd ../front && npm install",
+    "build": "cd backAuth && npm run build && cd ../backTodo && npm run build && cd ../front && npm run build",
+    "start:proyecto1": "cd backAuth && npm start",
+    "start:proyecto2": "cd backTodo && npm start",
+    "start:proyecto3": "cd front && npm start",
+    "start": "concurrently \"npm run start:proyecto1\" \"npm run start:proyecto2\" \"npm run start:proyecto3\"",
+    "dev:proyecto1": "cd backAuth && npm run dev",
+    "dev:proyecto2": "cd backTodo && npm run dev",
+    "dev:proyecto3": "cd front && npm run dev",
+    "dev": "concurrently \"npm run dev:proyecto1\" \"npm run dev:proyecto2\" \"npm run dev:proyecto3\"",
+    "test:proyecto1": "cd backAuth && npm test",
+    "test:proyecto2": "cd backTodo && npm test",
+    "test": "concurrently \"npm run test:proyecto1\" \"npm run test:proyecto2\""
+    
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0" 
+  }
+}
