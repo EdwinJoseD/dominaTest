@@ -35,10 +35,11 @@ Para los poryectos **backAuth** y **backTodo** se necesitan las siguientes varia
 
 Instalar las dependencias:
 
-````sh
+```sh
 git https://github.com/EdwinJoseD/dominaTest.git
 cd dominaTest
 npm install && npm run install
+```
 
 ### Ejecución
 
@@ -46,7 +47,7 @@ Para iniciar el proyecto en modo desarrollo, utilice el siguiente comando:
 
 ```sh
 npm run dev
-````
+```
 
 ### Compilación
 
